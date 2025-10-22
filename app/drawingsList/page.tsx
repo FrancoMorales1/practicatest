@@ -1,4 +1,5 @@
 import useDrawings from './useDrawings';
+import DrawList from '@/components/DrawingList';
 
 export default async function DrawingsList() {
   await new Promise((resolve) => setTimeout(resolve, 1000)); // Simulate network delay
@@ -11,31 +12,7 @@ export default async function DrawingsList() {
         <h1 className="text-3xl font-semibold text-center mb-10 text-gray-100">
           Lista de dibujos
         </h1>
-
-        {drawings.length === 0 ? (
-          <p className="text-center text-gray-400">No hay dibujos disponibles ¡Podrias ser el primero!</p>
-        ) : (
-          <ul className="grid grid-cols-3 gap-8">
-            {drawings.map((draw, index) => (
-              <li
-                key={draw.id || index}
-                className="border border-neutral-800 rounded-xl p-4 bg-neutral-950 hover:bg-neutral-800 transition flex flex-col items-center"
-              >
-                <img
-                  src={draw.data || '/placeholder.webp'}
-                  alt={`Drawing by ${draw.author || 'Anónimo'}`}
-                  className="w-full h-60 object-contain rounded-md bg-neutral-800 mb-4"
-                />
-                <p className="font-medium text-gray-100 text-center">
-                  {draw.author || 'Anónimo'}
-                </p>
-                <p className="text-sm text-gray-500 text-center">
-                  {(draw.tags || []).join(', ')}
-                </p>
-              </li>
-            ))}
-          </ul>
-        )}
+        <DrawList drawings={drawings} />
       </div>
     </div>
   );
